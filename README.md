@@ -1,5 +1,4 @@
-# README
-
+ 
 # 🎙️ **Whisper Transcription Tool**
 
 Transform your audio and video files into accurate subtitles with Whisper Transcription Tool. Designed for simplicity and versatility, this console application allows you to transcribe or translate content, with options for models, languages, and output formats.
@@ -121,12 +120,6 @@ Esta herramienta convierte tus archivos de audio en texto sin esfuerzo.
 * **Accurate Results** : Leverage OpenAI's Whisper models for state-of-the-art transcription.
 * **Customizable** : Choose tasks, languages, models, and formats as per your project needs.
 * **Efficient Workflow** : Seamless interaction through intuitive menus.
-
----
-
-## 📞 **Support**
-
-If you have any issues, suggestions, or feedback, feel free to open an issue on the [GitHub repository](https://github.com/yourusername/whisper-transcription-tool/issues).
 
 ---
 
