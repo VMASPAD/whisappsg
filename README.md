@@ -120,15 +120,4 @@ Esta herramienta convierte tus archivos de audio en texto sin esfuerzo.
 * **Accurate Results** : Leverage OpenAI's Whisper models for state-of-the-art transcription.
 * **Customizable** : Choose tasks, languages, models, and formats as per your project needs.
 * **Efficient Workflow** : Seamless interaction through intuitive menus.
-
----
-
-## 🏆 **Contribute**
-
-Want to enhance the tool?
-
-1. Fork the repository.
-2. Create your feature branch (`git checkout -b feature/amazing-feature`).
-3. Commit your changes (`git commit -m 'Add amazing feature'`).
-4. Push to the branch (`git push origin feature/amazing-feature`).
-5. Open a pull request.
+ 
