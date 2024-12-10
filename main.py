@@ -1,6 +1,5 @@
 import whisper
-import tkinter as tk
-from tkinter import filedialog
+from easygui import fileopenbox, diropenbox
 from rich.console import Console
 from rich.prompt import IntPrompt
 import argparse
@@ -9,28 +8,25 @@ import os
 console = Console()
 
 def select_file():
-    """Open a dialog to select an audio or video file."""
-    root = tk.Tk()
-    root.withdraw()
-    file_path = filedialog.askopenfilename(
+    """Opens a dialog to select an audio/video file."""
+    file_path = fileopenbox(
         title="Select an audio/video file",
-        filetypes=[("Audio/Video Files", "*.mp3 *.mp4 *.wav *.m4a *.ogg *.flac")]
+        filetypes=["*.mp3", "*.mp4", "*.wav", "*.m4a", "*.ogg", "*.flac"]
     )
     return file_path
 
 def select_output_directory():
-    """Open a dialog to select an output directory."""
-    root = tk.Tk()
-    root.withdraw()
-    output_path = filedialog.askdirectory(title="Select the output directory")
+    """Opens a dialog to select an output directory."""
+    output_path = diropenbox(title="Select the output directory")
     return output_path
 
 def display_menu(options, prompt="Select an option:"):
-    """Display an interactive menu using Rich."""
+    """Displays a menu interactively with Rich."""
     console.print("\n[bold yellow]Available options:[/bold yellow]")
     for i, option in enumerate(options, start=1):
         console.print(f"[bold cyan]{i}[/bold cyan]. {option}")
-    return IntPrompt.ask(f"[bold green]{prompt}[/bold green]", choices=[str(i) for i in range(1, len(options) + 1)])
+    choice = IntPrompt.ask(f"[bold green]{prompt}[/bold green]", choices=[str(i) for i in range(1, len(options) + 1)])
+    return choice
 
 def transcribe_file(args):
     if args.audio:
@@ -80,7 +76,8 @@ def transcribe_file(args):
         "pt": "Portuguese",
         "ar": "Arabic"
     }
-    language_choice = display_menu([language_display[lang] for lang in languages], "Select the language for the subtitles:")
+
+    language_choice = display_menu([language_display[lang] for lang in languages], "Select the language:")
     language_code = languages[language_choice - 1]
 
     console.print(f"[bold cyan]Loading Whisper model '{model_name}'...[/bold cyan]")
@@ -100,11 +97,11 @@ def transcribe_file(args):
     console.print("[bold green]Process completed successfully. Subtitles generated.[/bold green]")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Whisper-based transcription application")
+    parser = argparse.ArgumentParser(description="Whisper transcription application")
     parser.add_argument("audio", nargs="*", help="Audio or video file to transcribe")
-    parser.add_argument("--output_dir", type=str, help="Directory to save the subtitles")
-    parser.add_argument("--task", choices=["transcribe", "translate"], help="Task to perform")
+    parser.add_argument("--output_dir", type=str, help="Directory where to save the subtitles")
+    parser.add_argument("--task", choices=["transcribe", "translate"], default="transcribe", help="Task to perform")
     parser.add_argument("--language", type=str, help="Language to use for transcription or translation")
-    
+
     args = parser.parse_args()
     transcribe_file(args)
